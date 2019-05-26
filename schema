@@ -8,8 +8,9 @@ page
       - name
       - name
       - name
-  download
-  reload
+  buttons
+    download
+    reload
 
 generate(token) {
   send /v1/me/albums
