@@ -1,0 +1,19 @@
+page
+  chart
+    albums
+      - album
+      - album
+      - album
+    names
+      - name
+      - name
+      - name
+  download
+  reload
+
+generate(token) {
+  send /v1/me/albums
+  parse result
+  fetch all images (async maybe)
+  generate chart
+}
