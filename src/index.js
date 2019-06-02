@@ -15,6 +15,7 @@ function Album(props) {
 
 class Albums extends React.Component {
   render() {
+    console.log(this.props)
     const length = this.props.width * this.props.height;
     var albumsList = [];
     for (var i = 0; i < length; i++) {
@@ -26,44 +27,88 @@ class Albums extends React.Component {
 
 class Names extends React.Component {
   render() {
+    const names = this.props.names
     var namesList = [];
     for (var i = 0; i < this.props.length; i++) {
-      namesList.push(<Name name={this.props.names[i]} />);
+      namesList.push(<Name name={names[i]} />);
     }
     return namesList;
-  }
-}
+  } }
 
 class Chart extends React.Component {
   render() {
     return (
       <div className="chart">
-        <div className="albums">
-          <Albums covers={this.props.covers} width={4} height={4} />
-        </div>
-        <div className="names">
-          <Names names={this.props.names} length={16} />
-        </div>
+        <Albums
+          covers={this.props.covers}
+          width={this.props.coversGridWidth}
+          height={this.props.coversGridHeight}
+        />
+        <Names
+          names={this.props.names}
+          length={this.props.namesLength}
+        />
+      </div>
+    )
+  }
+}
+
+class Buttons extends React.Component {
+  render() {
+    return (
+      <div class="buttons">
+        <input type="text" name="width" placeholder="width" onChange={this.props.handleWidthChange} />
+        <input type="text" name="height" placeholder="height" onChange={this.props.handleHeightChange} />
       </div>
     )
   }
 }
 
 class Page extends React.Component {
+  constructor() {
+    super(constructor)
+    this.state = {
+      coversGridWidth: 4,
+      coversGridHeight: 4,
+      namesLength: 16
+    }
+  }
+
+  handleWidthChange = (event) => {
+    var width = Number(event.target.value)
+    this.setState({
+      coversGridWidth: width,
+      namesLength: width * this.state.coversGridHeight
+    })
+  }
+
+  handleHeightChange = (event) => {
+    var height = Number(event.target.value)
+    this.setState({
+      coversGridHeight: height,
+      namesLength: height * this.state.coversGridWidth
+    })
+  }
+
   render() {
-    const token = "BQAHgSstgC61ikSojiZWcxq9bnp_vJLiuGYsqTl3o-SnjnbVuVP3nSrSRguCYtprlqaD-r4vS9gXY7qQfFe18yS5KEPthAyVPKMjIA_uDrMoYrU8GTNRBXnOwC6LueVc5Zps3AmyoGhs4tBGUj4hb5jjdHZ2O9P6nQbT9w2VwOP4-kicnEIPmrxs"
+    const token = process.env.REACT_APP_SPOTIFY_AUTH_TOKEN
     const data = fetchDataFromAPI(token)
     console.log("PARSED DATA:")
     console.log(data)
     return (
       <div className="page">
-        <Chart covers={data.covers} names={data.names} />
+        <Buttons 
+          handleWidthChange={this.handleWidthChange}
+          handleHeightChange={this.handleHeightChange}
+        />
+        <Chart
+          covers={data.covers}
+          coversGridWidth={this.state.coversGridWidth}
+          coversGridHeight={this.state.coversGridHeight}
+          names={data.names}
+          namesLength={this.state.namesLength}
+        />
       </div>
-      /*
-      <div className="buttons">
-        <Buttons />
-      </div>
-      */
     )
   }
 }
