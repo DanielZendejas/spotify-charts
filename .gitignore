@@ -19,6 +19,7 @@
 .env.production.local
 
 priv/
+*.swp
 
 npm-debug.log*
 yarn-debug.log*
