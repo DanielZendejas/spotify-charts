@@ -21,7 +21,19 @@ class Albums extends React.Component {
     for (var i = 0; i < length; i++) {
       albumsList.push(<Album cover={this.props.covers[i]} />);
     }
-    return albumsList;
+    var styleString = {
+      display: "grid",
+      "grid-template-columns": "repeat(" + this.props.width + ",120px)",
+      "grid-template-rows": "repeat(" + this.props.height + ",120px)",
+    }
+    return (
+      <div
+        className="albums"
+        style={styleString}
+      >
+        {albumsList}
+      </div>
+    )
   }
 }
 
@@ -32,8 +44,13 @@ class Names extends React.Component {
     for (var i = 0; i < this.props.length; i++) {
       namesList.push(<Name name={names[i]} />);
     }
-    return namesList;
-  } }
+    return (
+      <div className="names">
+          {namesList}
+      </div>
+    )
+  }
+}
 
 class Chart extends React.Component {
   render() {
@@ -93,6 +110,9 @@ class Page extends React.Component {
   render() {
     const token = process.env.REACT_APP_SPOTIFY_AUTH_TOKEN
     const data = fetchDataFromAPI(token)
+    if (data === null) {
+      return "NO DATA FROM SPOTIFY"
+    }
     console.log("PARSED DATA:")
     console.log(data)
     return (
@@ -122,6 +142,11 @@ function fetchDataFromAPI(token) {
   var data = {
     covers: [],
     names: []
+  }
+  if (undefined === response.items) {
+    console.log("RESPONSE")
+    console.log(response)
+    return null;
   }
   response.items.forEach(function(item) {
     data.covers.push(item.album.images[0].url);
