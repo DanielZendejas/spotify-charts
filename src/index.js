@@ -15,14 +15,13 @@ function Album(props) {
 
 class Albums extends React.Component {
   render() {
-    console.log(this.props)
     const length = this.props.width * this.props.height;
     var albumsList = [];
     for (var i = 0; i < length; i++) {
       albumsList.push(<Album cover={this.props.covers[i]} />);
     }
     var styleString = {
-      display: "grid",
+      display: "inline-grid",
       "grid-template-columns": "repeat(" + this.props.width + ",120px)",
       "grid-template-rows": "repeat(" + this.props.height + ",120px)",
       "grid-gap": "5px"
@@ -46,7 +45,10 @@ class Names extends React.Component {
       namesList.push(<Name name={names[i]} />);
     }
     return (
-      <div className="names">
+      <div
+        className="names"
+        style={{display: "inline-block"}}
+      >
           {namesList}
       </div>
     )
@@ -88,7 +90,6 @@ class Login extends React.Component {
   }
 
   render() {
-    console.log("Display in login: " + this.props.display)
     return (
       <div
         className="loginOverlay"
@@ -119,11 +120,9 @@ class Page extends React.Component {
   constructor() {
     super(constructor)
     var loggedIn = false
-    console.log(window.location)
     if (window.location.href.indexOf("logged_in") != -1) {
       loggedIn = true
     }
-    console.log("Logged in in page: " + loggedIn)
     this.state = {
       coversGridWidth: 4,
       coversGridHeight: 4,
@@ -148,17 +147,27 @@ class Page extends React.Component {
     })
   }
 
+  getToken(anchor) {
+    var array = anchor.split("&")
+    var token = ""
+    for (var i = 0; i < array.length; i++) {
+      if (array[i].indexOf("access_token") != -1) {
+        token = array[i].split("=")[1]
+      }
+    }
+    return token
+  }
+
   render() {
-    const token = process.env.REACT_APP_SPOTIFY_AUTH_TOKEN
+    const token = this.getToken(window.location.hash)
     const data = fetchDataFromAPI(token)
     if (data === null) {
-      return "NO DATA FROM SPOTIFY"
+      return (
+        <Login display={this.state.display} />
+      )
     }
-    console.log("PARSED DATA:")
-    console.log(data)
     return (
       <div className="page">
-        <Login display={this.state.display} />
         <Buttons 
           handleWidthChange={this.handleWidthChange}
           handleHeightChange={this.handleHeightChange}
@@ -186,8 +195,6 @@ function fetchDataFromAPI(token) {
     names: []
   }
   if (undefined === response.items) {
-    console.log("RESPONSE")
-    console.log(response)
     return null;
   }
   response.items.forEach(function(item) {
