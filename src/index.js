@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Html2Canvas from 'html2canvas';
+
 
 function Name(props) {
   return (
@@ -56,14 +58,36 @@ class Names extends React.Component {
 }
 
 class Chart extends React.Component {
+  generateAndStoreCanvas() {
+    var chart = document.getElementById("chart")
+    var downloadButton = document.getElementById("download")
+    Html2Canvas(chart, {allowTaint: true}).then(function(chartAsCanvas) {
+      console.log("CANVAS RENDERING IN CHART")
+      var chartImageData = chartAsCanvas.toDataURL("image/png").replace(/^data:image\/png/, "data:application/octet-stream")
+      downloadButton.setAttribute("href", chartImageData)
+      downloadButton.setAttribute("download", "my_file.png")
+      console.log(chartImageData)
+      document.getElementById("preview").setAttribute("src", chartImageData)
+    })
+  }
+
+  componentDidMount() {
+    this.generateAndStoreCanvas()
+  }
+
+  componentDidUpdate() {
+    this.generateAndStoreCanvas()
+  }
+
   render() {
     return (
-      <div className="chart">
+      <div id="chart">
         <Albums
           covers={this.props.covers}
           width={this.props.coversGridWidth}
           height={this.props.coversGridHeight}
         />
+        <img src="https://lh5.ggpht.com/0vCbwJp56dIpzRmi7rhYR7_P3zUjUNwULMEpMcSoPtDXGJFDa_H2akeFv_iUpY4_-Q=w170" />
         <Names
           names={this.props.names}
           length={this.props.namesLength}
@@ -79,6 +103,9 @@ class Buttons extends React.Component {
       <div className="buttons">
         <input type="text" name="width" placeholder="width" onChange={this.props.handleWidthChange} />
         <input type="text" name="height" placeholder="height" onChange={this.props.handleHeightChange} />
+        <a id="download">
+          Download
+        </a>
       </div>
     )
   }
@@ -172,6 +199,7 @@ class Page extends React.Component {
           handleWidthChange={this.handleWidthChange}
           handleHeightChange={this.handleHeightChange}
         />
+        <img id="preview" src="" />
         <Chart
           covers={data.covers}
           coversGridWidth={this.state.coversGridWidth}
