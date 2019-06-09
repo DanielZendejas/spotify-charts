@@ -11,7 +11,7 @@ function Name(props) {
 
 function Album(props) {
   return (
-    <img width={120} height={120} src={props.cover} />
+    <img crossOrigin='Anonymous' width={120} height={120} src={props.cover} />
   )
 }
 
@@ -61,7 +61,7 @@ class Chart extends React.Component {
   generateAndStoreCanvas() {
     var chart = document.getElementById("chart")
     var downloadButton = document.getElementById("download")
-    Html2Canvas(chart, {allowTaint: true}).then(function(chartAsCanvas) {
+    Html2Canvas(chart, {useCORS: true, allowTaint: true}).then(function(chartAsCanvas) {
       console.log("CANVAS RENDERING IN CHART")
       var chartImageData = chartAsCanvas.toDataURL("image/png").replace(/^data:image\/png/, "data:application/octet-stream")
       downloadButton.setAttribute("href", chartImageData)
@@ -87,7 +87,6 @@ class Chart extends React.Component {
           width={this.props.coversGridWidth}
           height={this.props.coversGridHeight}
         />
-        <img src="https://lh5.ggpht.com/0vCbwJp56dIpzRmi7rhYR7_P3zUjUNwULMEpMcSoPtDXGJFDa_H2akeFv_iUpY4_-Q=w170" />
         <Names
           names={this.props.names}
           length={this.props.namesLength}
@@ -199,7 +198,6 @@ class Page extends React.Component {
           handleWidthChange={this.handleWidthChange}
           handleHeightChange={this.handleHeightChange}
         />
-        <img id="preview" src="" />
         <Chart
           covers={data.covers}
           coversGridWidth={this.state.coversGridWidth}
