@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Html2Canvas from 'html2canvas';
 
-
 function Name(props) {
   return (
     <li> {props.name} </li>
@@ -58,7 +57,7 @@ class Names extends React.Component {
 }
 
 class Chart extends React.Component {
-  generateAndStoreCanvas() {
+  generateAndStoreCanvas = (props) => {
     var chart = document.getElementById("chart")
     var downloadButton = document.getElementById("download")
     Html2Canvas(chart, {useCORS: true, allowTaint: true}).then(function(chartAsCanvas) {
@@ -66,17 +65,17 @@ class Chart extends React.Component {
       var chartImageData = chartAsCanvas.toDataURL("image/png").replace(/^data:image\/png/, "data:application/octet-stream")
       downloadButton.setAttribute("href", chartImageData)
       downloadButton.setAttribute("download", "my_file.png")
+      props.setDownloadIsClickable()
       console.log(chartImageData)
-      document.getElementById("preview").setAttribute("src", chartImageData)
     })
   }
 
   componentDidMount() {
-    this.generateAndStoreCanvas()
+    this.generateAndStoreCanvas(this.props)
   }
 
   componentDidUpdate() {
-    this.generateAndStoreCanvas()
+    this.generateAndStoreCanvas(this.props)
   }
 
   render() {
@@ -97,14 +96,23 @@ class Chart extends React.Component {
 }
 
 class Buttons extends React.Component {
+  getDownloadLink() {
+    if (this.props.downloadIsClickable) {
+      return (
+        <a id="download"> Download </a>
+      )
+    }
+    return (
+      <label id="download"> Download </label>
+    )
+  }
+
   render() {
     return (
       <div className="buttons">
         <input type="text" name="width" placeholder="width" onChange={this.props.handleWidthChange} />
         <input type="text" name="height" placeholder="height" onChange={this.props.handleHeightChange} />
-        <a id="download">
-          Download
-        </a>
+        {this.getDownloadLink()}
       </div>
     )
   }
@@ -153,7 +161,8 @@ class Page extends React.Component {
       coversGridWidth: 4,
       coversGridHeight: 4,
       namesLength: 16,
-      display: loggedIn ? "none" : "block"
+      display: loggedIn ? "none" : "block",
+      downloadIsClickable: false
     }
   }
 
@@ -161,7 +170,8 @@ class Page extends React.Component {
     var width = Number(event.target.value)
     this.setState({
       coversGridWidth: width,
-      namesLength: width * this.state.coversGridHeight
+      namesLength: width * this.state.coversGridHeight,
+      downloadIsClickable: false
     })
   }
 
@@ -169,8 +179,16 @@ class Page extends React.Component {
     var height = Number(event.target.value)
     this.setState({
       coversGridHeight: height,
-      namesLength: height * this.state.coversGridWidth
+      namesLength: height * this.state.coversGridWidth,
+      downloadIsClickable: false
     })
+  }
+
+  setDownloadIsClickable = () => {
+    console.log("SETTING CLICKABLE TO TRUE")
+    if (! this.state.downloadIsClickable) {
+      this.setState({downloadIsClickable: true})
+    }
   }
 
   getToken(anchor) {
@@ -194,15 +212,17 @@ class Page extends React.Component {
     }
     return (
       <div className="page">
-        <Buttons 
+        <Buttons
           handleWidthChange={this.handleWidthChange}
           handleHeightChange={this.handleHeightChange}
+          downloadIsClickable={this.state.downloadIsClickable}
         />
         <Chart
           covers={data.covers}
           coversGridWidth={this.state.coversGridWidth}
           coversGridHeight={this.state.coversGridHeight}
           names={data.names}
+          setDownloadIsClickable={this.setDownloadIsClickable}
           namesLength={this.state.namesLength}
         />
       </div>
