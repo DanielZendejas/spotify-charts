@@ -27,7 +27,7 @@ class Chart extends React.Component {
 
   render() {
     return (
-      <div id="chart">
+      <div id="chart" style={{display:"inline-block", float:"left", padding:"10px"}}>
         <Albums
           covers={this.props.covers}
           width={this.props.coversGridWidth}

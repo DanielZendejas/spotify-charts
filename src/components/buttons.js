@@ -14,7 +14,7 @@ class Buttons extends React.Component {
 
   render() {
     return (
-      <div id="buttons">
+      <div id="buttons" style={{"padding-left":"10px"}}>
         <input type="text" name="width" placeholder="width" onChange={this.props.handleWidthChange} />
         <input type="text" name="height" placeholder="height" onChange={this.props.handleHeightChange} />
         {this.getDownloadLink()}
