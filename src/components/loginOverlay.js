@@ -17,13 +17,13 @@ class LoginOverlay extends React.Component {
           width: "100%",
           height: "100%",
           position: "fixed",
-          "background-color": "black",
           display: this.props.display
         }}
       >
-        <label style={{color: "white"}}>
-          Welcome! Login and create your chart
+        <label>
+          Welcome! Login so we can create your chart!
         </label>
+        <br/>
         <button onClick={this.sendLoginRequest}>
           Login
         </button>

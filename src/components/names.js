@@ -11,7 +11,14 @@ class Names extends React.Component {
     return (
       <div
         id="names"
-        style={{display: "inline-block", float:"right", padding:"25px"}}
+        style={{
+          display:"inline-block",
+          float:"right",
+          padding:"0 25px",
+          "font-size":"medium",
+          "font-family":"Courier",
+          "list-style":"none"
+        }}
       >
           {namesList}
       </div>

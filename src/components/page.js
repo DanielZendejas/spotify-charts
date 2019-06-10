@@ -68,6 +68,8 @@ class Page extends React.Component {
       content = (
         <div id="page">
           <Buttons
+            widthValue={this.state.coversGridWidth}
+            heightValue={this.state.coversGridHeight}
             handleWidthChange={this.handleWidthChange}
             handleHeightChange={this.handleHeightChange}
             downloadIsClickable={this.state.downloadIsClickable}
