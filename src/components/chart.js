@@ -8,12 +8,10 @@ class Chart extends React.Component {
     var chart = document.getElementById("chart")
     var downloadButton = document.getElementById("download")
     Html2Canvas(chart, {useCORS: true, allowTaint: true}).then(function(chartAsCanvas) {
-      console.log("CANVAS RENDERING IN CHART")
       var chartImageData = chartAsCanvas.toDataURL("image/png").replace(/^data:image\/png/, "data:application/octet-stream")
       downloadButton.setAttribute("href", chartImageData)
       downloadButton.setAttribute("download", "my_file.png")
       props.setDownloadIsClickable()
-      console.log(chartImageData)
     })
   }
 
