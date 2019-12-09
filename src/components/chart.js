@@ -33,6 +33,7 @@ class Chart extends React.Component {
         />
         <Names
           names={this.props.names}
+          width={this.props.coversGridWidth}
           length={this.props.namesLength}
         />
       </div>

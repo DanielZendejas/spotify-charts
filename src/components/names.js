@@ -3,10 +3,12 @@ import Name from './name.js'
 
 class Names extends React.Component {
   render() {
-    const names = this.props.names
     var namesList = [];
     for (var i = 0; i < this.props.length; i++) {
-      namesList.push(<Name name={names[i]} />);
+      if (i !== 0 && i % this.props.width === 0) {
+        namesList.push(<br/>)
+      }
+      namesList.push(<Name name={this.props.names[i]} />);
     }
     return (
       <div
