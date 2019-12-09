@@ -8,7 +8,7 @@ class Buttons extends React.Component {
       )
     }
     return (
-      <label id="download"> Download </label>
+      <label id="download"> Please wait... </label>
     )
   }
 

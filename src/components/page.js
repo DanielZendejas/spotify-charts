@@ -1,5 +1,4 @@
 import React from 'react';
-import Html2Canvas from 'html2canvas';
 import LoginOverlay from './loginOverlay.js'
 import Buttons from './buttons.js'
 import Chart from './chart.js'
@@ -8,7 +7,7 @@ class Page extends React.Component {
   constructor() {
     super(constructor)
     var loggedIn = false
-    if (window.location.href.indexOf("logged_in") != -1) {
+    if (window.location.href.indexOf("logged_in") !== -1) {
       loggedIn = true
     }
     this.state = {
@@ -39,7 +38,6 @@ class Page extends React.Component {
   }
 
   setDownloadIsClickable = () => {
-    console.log("SETTING CLICKABLE TO TRUE")
     if (! this.state.downloadIsClickable) {
       this.setState({downloadIsClickable: true})
     }
@@ -49,7 +47,7 @@ class Page extends React.Component {
     var array = anchor.split("&")
     var token = ""
     for (var i = 0; i < array.length; i++) {
-      if (array[i].indexOf("access_token") != -1) {
+      if (array[i].indexOf("access_token") !== -1) {
         token = array[i].split("=")[1]
       }
     }
