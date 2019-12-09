@@ -6,6 +6,12 @@ class LoginOverlay extends React.Component {
   }
 
   render() {
+    var label = "Welcome! Login so we can create your chart."
+    var display = this.props.display
+    if (this.props.error) {
+      display = "block"
+      label = "There seems to be an authentication error. Please, try to login again."
+    }
     return (
       <div
         id="loginOverlay"
@@ -17,12 +23,10 @@ class LoginOverlay extends React.Component {
           width: "100%",
           height: "100%",
           position: "fixed",
-          display: this.props.display
+          display: display
         }}
       >
-        <label>
-          Welcome! Login so we can create your chart!
-        </label>
+        <label>{label}</label>
         <br/>
         <button onClick={this.sendLoginRequest}>
           Login

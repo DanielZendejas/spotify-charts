@@ -8,7 +8,7 @@ class Album extends React.Component {
         width={120}
         height={120}
         src={this.props.cover}
-        alt="Failed to load album cover"
+        alt="Album cover"
       />
     )
   }

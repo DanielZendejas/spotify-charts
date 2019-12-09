@@ -54,16 +54,25 @@ class Page extends React.Component {
     return token
   }
 
-  render() {
-    const token = this.getToken(window.location.hash)
-    const data = fetchDataFromAPI(token)
-    var content = (
+  getLoginOverlay(error) {
+    return (
       <div id="page">
-        <LoginOverlay display={this.state.display} />
+        <LoginOverlay
+          display={this.state.display}
+          error={error}
+        />
       </div>
     )
-    if (data !== null) {
-      content = (
+  }
+
+  render() {
+    const token = this.getToken(window.location.hash)
+    if (token === "") {
+      return this.getLoginOverlay()
+    }
+    const data = fetchDataFromAPI(token)
+    if (!data.error) {
+      return (
         <div id="page">
           <Buttons
             widthValue={this.state.coversGridWidth}
@@ -83,7 +92,7 @@ class Page extends React.Component {
         </div>
       )
     }
-    return content
+    return this.getLoginOverlay(data.error)
   }
 }
 
@@ -98,7 +107,7 @@ function fetchDataFromAPI(token) {
     names: []
   }
   if (undefined === response.items) {
-    return null;
+    return {error: response.error.message};
   }
   response.items.forEach(function(item) {
     data.covers.push(item.album.images[0].url);
