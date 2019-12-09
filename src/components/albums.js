@@ -6,13 +6,14 @@ class Albums extends React.Component {
     const length = this.props.width * this.props.height;
     var albumsList = [];
     for (var i = 0; i < length; i++) {
-      albumsList.push(<Album cover={this.props.covers[i]} />);
+      var cover = this.props.covers[i]
+      albumsList.push(<Album key={i + "-" + cover} cover={cover} />);
     }
     var styleString = {
       display: "inline-grid",
-      "grid-template-columns": "repeat(" + this.props.width + ",120px)",
-      "grid-template-rows": "repeat(" + this.props.height + ",120px)",
-      "grid-gap": "5px"
+      "gridTemplateColumns": "repeat(" + this.props.width + ",120px)",
+      "gridTemplateRows": "repeat(" + this.props.height + ",120px)",
+      "gridGap": "5px"
     }
     return (
       <div

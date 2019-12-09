@@ -6,9 +6,10 @@ class Names extends React.Component {
     var namesList = [];
     for (var i = 0; i < this.props.length; i++) {
       if (i !== 0 && i % this.props.width === 0) {
-        namesList.push(<br/>)
+        namesList.push(<br key={i + "-space"}/>)
       }
-      namesList.push(<Name name={this.props.names[i]} />);
+      var name = this.props.names[i]
+      namesList.push(<Name key={i + "-name"} name={name} />);
     }
     return (
       <div
@@ -17,9 +18,9 @@ class Names extends React.Component {
           display:"inline-block",
           float:"right",
           padding:"0 25px",
-          "font-size":"medium",
-          "font-family":"Courier",
-          "list-style":"none"
+          "fontSize":"medium",
+          "fontFamily":"Courier",
+          "listStyle":"none"
         }}
       >
           {namesList}
