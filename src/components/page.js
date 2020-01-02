@@ -20,7 +20,7 @@ class Page extends React.Component {
   }
 
   handleWidthChange = (event) => {
-    var width = Number(event.target.value)
+    var width = Math.min(5, Number(event.target.value))
     this.setState({
       coversGridWidth: width,
       namesLength: width * this.state.coversGridHeight,
@@ -29,7 +29,7 @@ class Page extends React.Component {
   }
 
   handleHeightChange = (event) => {
-    var height = Number(event.target.value)
+    var height = Math.min(4, Number(event.target.value))
     this.setState({
       coversGridHeight: height,
       namesLength: height * this.state.coversGridWidth,
