@@ -15,6 +15,7 @@ class LoginOverlay extends React.Component {
     return (
       <div
         id="loginOverlay"
+        class="text-center"
         style={{
           top: 0,
           bottom: 0,
@@ -23,12 +24,12 @@ class LoginOverlay extends React.Component {
           width: "100%",
           height: "100%",
           position: "fixed",
-          display: display
+          display: display,
         }}
       >
         <label>{label}</label>
         <br/>
-        <button onClick={this.sendLoginRequest}>
+        <button class="btn btn-primary" onClick={this.sendLoginRequest}>
           Login
         </button>
       </div>

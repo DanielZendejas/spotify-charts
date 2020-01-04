@@ -73,14 +73,11 @@ class Page extends React.Component {
     const data = fetchDataFromAPI(token)
     if (!data.error) {
       return (
-        <div id="page">
-          <Buttons
-            widthValue={this.state.coversGridWidth}
-            heightValue={this.state.coversGridHeight}
-            handleWidthChange={this.handleWidthChange}
-            handleHeightChange={this.handleHeightChange}
-            downloadIsClickable={this.state.downloadIsClickable}
-          />
+        <div
+          id="page"
+          class="container-fluid"
+          style={{width:"100%"}}
+        >
           <Chart
             covers={data.covers}
             coversGridWidth={this.state.coversGridWidth}
@@ -88,6 +85,13 @@ class Page extends React.Component {
             names={data.names}
             setDownloadIsClickable={this.setDownloadIsClickable}
             namesLength={this.state.namesLength}
+          />
+          <Buttons
+            widthValue={this.state.coversGridWidth}
+            heightValue={this.state.coversGridHeight}
+            handleWidthChange={this.handleWidthChange}
+            handleHeightChange={this.handleHeightChange}
+            downloadIsClickable={this.state.downloadIsClickable}
           />
         </div>
       )

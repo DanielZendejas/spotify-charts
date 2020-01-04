@@ -20,7 +20,8 @@ class Names extends React.Component {
           padding:"0 25px",
           "fontSize":"medium",
           "fontFamily":"Courier",
-          "listStyle":"none"
+          "listStyle":"none",
+          "color":"white"
         }}
       >
           {namesList}

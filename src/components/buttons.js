@@ -14,7 +14,11 @@ class Buttons extends React.Component {
 
   render() {
     return (
-      <div id="buttons" style={{"paddingLeft":"10px"}}>
+      <div
+        id="buttons"
+        class="row justify-content-center"
+        style={{width:"100%"}}
+      >
         <label> Width: </label>
         <input
           type="number"
