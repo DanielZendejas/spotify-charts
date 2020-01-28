@@ -16,8 +16,8 @@ class Buttons extends React.Component {
     return (
       <div
         id="buttons"
-        class="row justify-content-center"
         style={{width:"100%"}}
+        class="p-2 text-center"
       >
         <label> Width: </label>
         <input

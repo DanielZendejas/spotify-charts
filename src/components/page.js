@@ -3,6 +3,8 @@ import LoginOverlay from './loginOverlay.js'
 import Buttons from './buttons.js'
 import Chart from './chart.js'
 
+import './app.css'
+
 class Page extends React.Component {
   constructor() {
     super(constructor)
@@ -56,7 +58,11 @@ class Page extends React.Component {
 
   getLoginOverlay(error) {
     return (
-      <div id="page">
+      <div
+        id="page"
+        class="container"
+        style={{"display":"flex"}}
+      >
         <LoginOverlay
           display={this.state.display}
           error={error}
@@ -75,8 +81,8 @@ class Page extends React.Component {
       return (
         <div
           id="page"
-          class="container-fluid"
-          style={{width:"100%"}}
+          class="container"
+          style={{"display":"flex-wrap"}}
         >
           <Chart
             covers={data.covers}

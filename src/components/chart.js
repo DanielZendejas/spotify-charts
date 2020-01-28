@@ -27,14 +27,11 @@ class Chart extends React.Component {
     return (
       <div
         id="chart"
+        class="m-2 p-2"
         style={{
           "background-color":"black",
-          "margin-top":"2%",
-          "margin-bottom":"2%",
-          "padding-top":"5px",
-          "padding-bottom":"5px"
+          display:"flex"
         }}
-        class="row justify-content-center"
       >
         <Albums
           covers={this.props.covers}

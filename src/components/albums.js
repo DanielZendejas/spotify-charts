@@ -13,7 +13,9 @@ class Albums extends React.Component {
       display: "inline-grid",
       "gridTemplateColumns": "repeat(" + this.props.width + ",120px)",
       "gridTemplateRows": "repeat(" + this.props.height + ",120px)",
-      "gridGap": "5px"
+      "gridGap": "5px",
+      flex: 1,
+      "justifyContent": "center"
     }
     return (
       <div

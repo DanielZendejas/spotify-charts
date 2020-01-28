@@ -15,17 +15,8 @@ class LoginOverlay extends React.Component {
     return (
       <div
         id="loginOverlay"
-        class="text-center"
-        style={{
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-          width: "100%",
-          height: "100%",
-          position: "fixed",
-          display: display,
-        }}
+        class="m-auto text-center"
+        style={{width: "50%"}}
       >
         <label>{label}</label>
         <br/>

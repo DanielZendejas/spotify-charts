@@ -15,14 +15,14 @@ class Names extends React.Component {
       <div
         id="names"
         style={{
-          display:"inline-block",
           float:"right",
-          padding:"0 25px",
           "fontSize":"medium",
           "fontFamily":"Courier",
           "listStyle":"none",
-          "color":"white"
+          "color":"white",
+          flex: 1
         }}
+        class="p-2"
       >
           {namesList}
       </div>
