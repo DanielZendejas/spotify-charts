@@ -20,8 +20,12 @@ class LoginOverlay extends React.Component {
       >
         <label>{label}</label>
         <br/>
-        <button class="btn btn-primary" onClick={this.sendLoginRequest}>
-          Login
+        <button
+          id="loginButton"
+          class="btn-lg btn-primary"
+          onClick={this.sendLoginRequest}
+        >
+          Let's go!
         </button>
       </div>
     )
