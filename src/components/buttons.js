@@ -19,7 +19,7 @@ class Buttons extends React.Component {
         style={{width:"100%"}}
         class="p-2 text-center"
       >
-        <label> Width: </label>
+        <label style={{color: "#bbe1fa"}}> Width: </label>
         <input
           type="number"
           name="width"
@@ -28,7 +28,7 @@ class Buttons extends React.Component {
           value={this.props.widthValue}
           onChange={this.props.handleWidthChange}
         />
-        <label> Height: </label>
+        <label style={{color: "#bbe1fa"}}> Height: </label>
         <input
           type="number"
           name="height"
