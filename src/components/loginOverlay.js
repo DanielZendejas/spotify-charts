@@ -2,7 +2,8 @@ import React from 'react';
 
 class LoginOverlay extends React.Component {
   sendLoginRequest = () => {
-    window.location = "https://accounts.spotify.com/authorize?client_id=54a0e6f7846742d8a378f7788b470679&redirect_uri=http:%2F%2Flocalhost:3000&scope=user-library-read&response_type=token&state=logged_in"
+    var host = process.env.REACT_APP_HOST
+    window.location = "https://accounts.spotify.com/authorize?client_id=54a0e6f7846742d8a378f7788b470679&redirect_uri=" + host + "&scope=user-library-read&response_type=token&state=logged_in"
   }
 
   render() {
