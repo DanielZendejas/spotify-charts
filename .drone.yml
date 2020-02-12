@@ -8,5 +8,6 @@ steps:
   environment:
     REACT_APP_HOST: http://albumcharts.xyz
   commands:
+  - npm install
   - npm run-script build
   - aws s3 sync build/ s3://albumcharts.xyz
