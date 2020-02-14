@@ -8,9 +8,7 @@ class LoginOverlay extends React.Component {
 
   render() {
     var label = "Welcome! Login so we can create your chart."
-    var display = this.props.display
     if (this.props.error) {
-      display = "block"
       label = "There seems to be an authentication error. Please, try to login again."
     }
     return (
