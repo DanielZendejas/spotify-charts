@@ -4,7 +4,7 @@ name: default
 
 steps:
 - name: deploy
-  image: danielzendejas/albumcharts:1.0.0
+  image: danielzendejas/albumcharts
   environment:
     REACT_APP_HOST: http://albumcharts.xyz
   commands:
