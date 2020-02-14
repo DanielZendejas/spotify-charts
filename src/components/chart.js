@@ -27,10 +27,11 @@ class Chart extends React.Component {
     return (
       <div
         id="chart"
-        class="m-2 p-2"
+        class="p-2"
         style={{
           "background-color":"black",
-          display:"flex"
+          display:"flex",
+          "border-radius":"20px"
         }}
       >
         <Albums
