@@ -15,6 +15,7 @@ steps:
   image: plugins/s3
   settings:
     bucket: albumcharts.xyz
+    region: us-east-2
     access_key:
       from_secret: aws_access_key_id
     secret_key:
@@ -22,4 +23,4 @@ steps:
     source:
       build/**/*
     target:
-      /target
+      /
