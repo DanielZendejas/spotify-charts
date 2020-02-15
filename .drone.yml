@@ -10,4 +10,16 @@ steps:
   commands:
   - npm install
   - npm run-script build
-  - aws s3 sync build/ s3://albumcharts.xyz
+
+- name: publish
+  image: plugins/s3
+  settings:
+    bucket: albumcharts.xyz
+    access_key:
+      from_secret: aws_access_key_id
+    secret_key:
+      from_secret: aws_secret_access_key
+    source:
+      build/
+    target:
+      /
