@@ -25,3 +25,6 @@ steps:
     target:
       /
     strip_prefix: build/
+  when:
+    event:
+      - tag
