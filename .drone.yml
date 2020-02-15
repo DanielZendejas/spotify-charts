@@ -1,0 +1,30 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: build
+  image: danielzendejas/albumcharts
+  environment:
+    REACT_APP_HOST: http://albumcharts.xyz
+  commands:
+  - npm install
+  - npm run-script build
+
+- name: publish
+  image: plugins/s3
+  settings:
+    bucket: albumcharts.xyz
+    region: us-east-2
+    access_key:
+      from_secret: aws_access_key_id
+    secret_key:
+      from_secret: aws_secret_access_key
+    source:
+      build/**/*
+    target:
+      /
+    strip_prefix: build/
+  when:
+    event:
+      - tag

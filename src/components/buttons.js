@@ -4,7 +4,12 @@ class Buttons extends React.Component {
   getDownloadLink() {
     if (this.props.downloadIsClickable) {
       return (
-        <a id="download"> Download </a>
+        <a
+          id="download"
+          href="#top"
+        >
+          Download
+        </a>
       )
     }
     return (
