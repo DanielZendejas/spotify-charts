@@ -20,6 +20,6 @@ steps:
     secret_key:
       from_secret: aws_secret_access_key
     source:
-      build/
+      build/**/*
     target:
-      /
+      /target
