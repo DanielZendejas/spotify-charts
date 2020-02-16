@@ -84,6 +84,18 @@ class Page extends React.Component {
           class="container"
           style={{"display":"flex-wrap"}}
         >
+          <h1 class="text-center" style={{"color":"#bbe1fa"}}>
+            Album Charts
+            <a
+              href="https://github.com/DanielZendejas/spotify-charts"
+              style={{"display":"inline","font-size":"small"}}
+            >
+              {process.env.REACT_APP_VERSION}
+            </a>
+          </h1>
+          <p class="text-center" style={{"color":"#bbe1fa"}}>
+            Shows your most recently listened albums. Select the dimensions for your chart and then download it as an image.
+          </p>
           <Chart
             covers={data.covers}
             coversGridWidth={this.state.coversGridWidth}
