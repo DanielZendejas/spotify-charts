@@ -7,9 +7,9 @@ steps:
   image: danielzendejas/albumcharts
   environment:
     REACT_APP_HOST: http://albumcharts.xyz
+    REACT_APP_VERSION: ${DRONE_TAG}
   commands:
   - npm install
-  - export REACT_APP_VERSION=`git describe --abbrev=0 --tags`
   - npm run-script build
 
 - name: publish
