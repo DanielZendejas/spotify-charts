@@ -9,7 +9,7 @@ steps:
     REACT_APP_HOST: http://albumcharts.xyz
   commands:
   - npm install
-  - npm run-script build
+  - REACT_APP_VERSION=`git describe --abbrev=0 --tags` npm run-script build
 
 - name: publish
   image: plugins/s3
